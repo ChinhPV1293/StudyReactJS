@@ -27,6 +27,9 @@ function App() {
           <Route exact path="/addNewFriend">
             <AddNewFriend />
           </Route>
+          <Route exact path="/registerAccount">
+            <RegisterAccount />
+          </Route>
         </Switch>
       </div>
     </Router>

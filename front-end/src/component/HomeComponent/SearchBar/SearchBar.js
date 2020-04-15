@@ -10,7 +10,7 @@ const SearchBar = props =>{
                 onChange={props.onChange}
             />
             <button onClick={props.onSearch}>Search</button>
-        </div>
+        </div>  
 
     );
 }

@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {useHistory} from "react-router-dom";
 import RegisterAccount from "./RegisterForm/RegisterAccount";
 import LoginForm from "./LoginForm/LoginForm";
-
+import {Button} from '@material-ui/core';
 const Login = props => {
     const history= useHistory();
 
@@ -33,12 +33,19 @@ const Login = props => {
         });
     };
 
+    const Register = (event) => {
+        history.push('/registerAccount');
+    };
+
     return (
         <React.Fragment>
             <LoginForm
                 onChange={handleChange}
                 onSubmit={handleSubmit}
                 value={value} />
+            <Button variant="contained" color="primary" onClick={Register}>
+                Register
+            </Button>
         </React.Fragment>
     );
 }
