@@ -97,6 +97,9 @@ const useStyles = makeStyles((theme) => ({
     fixedHeight: {
         height: 240,
     },
+    searchBar: {
+        
+    }
 }));
 
 const Home = props => {
@@ -146,7 +149,14 @@ const Home = props => {
                     </IconButton>
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                         Dashboard
-          </Typography>
+                    </Typography>
+                    <Box width="80%">
+                        <SearchBar
+                            className={classes.searchBar}
+                            value={searchTerm}
+                            onSearch={handleSearch}
+                            onChange={handleChange} />
+                    </Box>   
                     <IconButton color="inherit">
                         <Badge badgeContent={4} color="secondary">
                             <NotificationsIcon />
@@ -175,10 +185,10 @@ const Home = props => {
                 <div className={classes.appBarSpacer} />
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={3}>
-                        <SearchBar
+                        {/* <SearchBar
                             value={searchTerm}
                             onSearch={handleSearch}
-                            onChange={handleChange} />
+                            onChange={handleChange} /> */}
                         <Grid xs={10}>
                             <ListContact value={contactList} />
                         </Grid>
