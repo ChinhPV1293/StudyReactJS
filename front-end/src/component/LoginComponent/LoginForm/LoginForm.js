@@ -82,35 +82,6 @@ const LoginForm = props => {
                 <Grid item xs={false} sm={4} md={7} className={classes.image} />
                 <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
                         <form onSubmit={props.onSubmit}>
-<<<<<<< HEAD
-                            <h1>Login</h1>
-                            <InputLabel htmlFor="userName">
-                                User Name
-                            </InputLabel >
-                            <Input type="text"
-                                id="userName"
-                                placeholder="User Name"
-                                name="userName"
-                                value={props.value.userName}
-                                onChange={event => props.onChange(event, 'userName')} />
-                            <InputLabel htmlFor="passWord">
-                                Pass Word
-                            </InputLabel>
-                            <Input type="password"
-                                id="passWord"
-                                placeholder="Pass Word"
-                                name="passWord"
-                                value={props.value.passWord}
-                                onChange={event => props.onChange(event, 'passWord')} />
-                            <br />
-                            <Button
-                                variant="contained"
-                                type="submit"
-                                className={classes.margin}
-                                color="primary">
-                                Login
-                             </Button>
-=======
                             <div className={classes.paper}>
                                 <Avatar className={classes.avatar}>
                                     <LockOpenIcon />
@@ -172,7 +143,6 @@ const LoginForm = props => {
                                     <Copyright />
                                 </Box>
                             </div>                            
->>>>>>> origin/master
                         </form>
                     </Grid>
             </Grid>
