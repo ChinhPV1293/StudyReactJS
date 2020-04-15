@@ -1,11 +1,7 @@
 import React, {useState} from "react";
 import {useHistory} from "react-router-dom";
-import RegisterAccount from "./RegisterAccount/RegisterAccount";
+import RegisterAccount from "./RegisterForm/RegisterAccount";
 import LoginForm from "./LoginForm/LoginForm";
-import { FormControl,
-     InputLabel, Input, Button,
-    CssBaseline } from '@material-ui/core';
-import {FormGroup} from '@material-ui/core';
 
 const Login = props => {
     const history= useHistory();
