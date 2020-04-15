@@ -39,10 +39,11 @@ const SearchBar = props =>{
         <React.Fragment >
             <CssBaseline />
             <Grid container maxWidth="xs">
-                <Paper component="form"  className={classes.root}>
+                <Paper className={classes.root}>
                     <InputBase
                         value={props.value}
                         onChange={props.onChange}
+                        
                         className={classes.input}
                         placeholder="Search"
                         inputProps={{
@@ -52,8 +53,9 @@ const SearchBar = props =>{
                     <IconButton
                         type="submit"
                         className={classes.iconButton}
+                        onClick={props.onSearch}
                         aria-label="search"
-                        // onClick={props.onSearch}
+                        
                         >
                         <SearchIcon />
                     </IconButton>
