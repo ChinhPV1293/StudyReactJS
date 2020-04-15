@@ -49,6 +49,49 @@ let ContactList = [
         birthday: '1/1/2020',
         phoneNumber: '091234567'
     },
+    {
+        id: 8,
+        firstName: 'chinh',
+        lastName:'Nguyen Viet',
+        birthday: '1/1/2020',
+        phoneNumber: '091234567'
+    },
+    {
+        id: 9,
+        firstName: 'Hien',
+        lastName:'Nguyen Viet',
+        birthday: '1/1/2020',
+        phoneNumber: '091234567'
+    },
+    {
+        id: 10,
+        firstName: 'Hoa',
+        lastName:'Nguyen Viet',
+        birthday: '1/1/2020',
+        phoneNumber: '091234567'
+    },
+    {
+        id: 11,
+        firstName: 'Thanh',
+        lastName:'Nguyen Viet',
+        birthday: '1/1/2020',
+        phoneNumber: '091234567'
+    },
+    {
+        id: 12,
+        firstName: 'Ngoc',
+        lastName:'Nguyen Viet',
+        birthday: '1/1/2020',
+        phoneNumber: '091234567'
+    },
+    {
+        id: 13,
+        firstName: 'Mai Anh',
+        lastName:'Do Nguyen',
+        birthday: '1/1/2020',
+        phoneNumber: '091234567'
+    },
+
 ];
 
 
