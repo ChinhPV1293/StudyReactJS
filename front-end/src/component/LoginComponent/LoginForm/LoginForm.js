@@ -14,20 +14,22 @@ import {
     Typography
 } from '@material-ui/core';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+// import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
-function Copyright() {
-    return (
-        <Typography variant="body2" color="textSecondary" align="center">
-          {'Copyright © '}
-          <Link color="inherit" href="https://material-ui.com/">
-            RelaMa Page<FavoriteBorderIcon />
-          </Link>{' '}
-          {new Date().getFullYear()}
-          {'.'}
-        </Typography>
-    );
-}    
+// function Copyright() {
+//     return (
+//         <Typography variant="body2" color="textSecondary" align="center">
+//           {'Copyright © '}
+//           <Link color="inherit" href="https://material-ui.com/">
+//             RelaMa Page<FavoriteBorderIcon />
+//           </Link>{' '}
+//           {new Date().getFullYear()}
+//           {'.'}
+//         </Typography>
+//     );
+// }    
+import Copyright from "../../Utils/Copyright";
+  
 const StyledButton = withStyles({
     root: {
       background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
