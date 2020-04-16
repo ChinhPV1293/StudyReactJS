@@ -11,7 +11,7 @@ import Divider from '@material-ui/core/Divider';
 import DetailInfoService from '../../service/DetailInfoService';
 import Drawer from '@material-ui/core/Drawer';
 import AddNewFriend from './AddNewFriend/AddNewFriend';
-import {Link} from "react-router-dom";
+import {Link,Switch,Route,BrowserRouter as Router, useRouteMatch } from "react-router-dom";
 import { CssBaseline, Container, Typography, makeStyles, List, AppBar, Toolbar, Badge, Box, Grid, Paper  } from '@material-ui/core';
 import {ListItems,secondaryListItems} from './ListItems/ListItem';
 import Copyright from "../Utils/Copyright";
@@ -97,9 +97,13 @@ const useStyles = makeStyles((theme) => ({
     fixedHeight: {
         height: 240,
     },
+    searchBar: {
+        
+    }
 }));
 
 const Home = props => {
+    let { path, url } = useRouteMatch();
     const classes = useStyles();
     const history = useHistory();
     const [searchTerm,setSearchTerm] = React.useState("");
@@ -118,7 +122,8 @@ const Home = props => {
     const handleClick = (event) => {
         history.push('/listContact');
     }
-    const handleSearch = event => {
+    const handleSearch = (event) => {
+        debugger;
         let result= DetailInfoService.getByName(searchTerm);
         result=
         setContactList(
@@ -156,7 +161,14 @@ const Home = props => {
                     </IconButton>
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                         Dashboard
-          </Typography>
+                    </Typography>
+                    <Box width="80%">
+                        <SearchBar
+                            className={classes.searchBar}
+                            value={searchTerm}
+                            onSearch={handleSearch}
+                            onChange={handleChange} />
+                    </Box>   
                     <IconButton color="inherit">
                         <Badge badgeContent={4} color="secondary">
                             <NotificationsIcon />
@@ -177,7 +189,7 @@ const Home = props => {
                     </IconButton>
                 </div>
                 <Divider />
-                <List>{ListItems}</List>
+                <ListItems url={url} />
                 <Divider />
                 <List>{secondaryListItems}</List>
             </Drawer>
@@ -185,12 +197,16 @@ const Home = props => {
                 <div className={classes.appBarSpacer} />
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={3}>
-                        <SearchBar
-                            value={searchTerm}
-                            onSearch={handleSearch}
-                            onChange={handleChange} />
                         <Grid xs={10}>
-                            <ListContact value={contactList} />
+                            <Switch>
+                                {/* define a component arrive */}
+                                <Route exact path={path}>
+                                    <ListContact value={contactList} />
+                                </Route>
+                                <Route path={`${path}/addNewFriend`}>
+                                    <AddNewFriend />
+                                </Route>
+                            </Switch>
                         </Grid>
                     </Grid>
                     <Box pt={4}>

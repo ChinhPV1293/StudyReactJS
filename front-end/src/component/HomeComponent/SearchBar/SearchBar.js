@@ -1,16 +1,28 @@
 import React from 'react';
-import { CssBaseline, Button, TextField, Grid, makeStyles } from '@material-ui/core';
+import { CssBaseline, Paper, TextField, Grid, makeStyles, InputBase  } from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
+import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles( (theme) =>({
-    root : {
-        flexFlow : 1,
-    },
+    root: {
+        padding: '2px 4px',
+        display: 'flex',
+        alignItems: 'center',
+        width: 400,
+      },
+      input: {
+        marginLeft: theme.spacing(1),
+        flex: 1,
+      },
+      iconButton: {
+        padding: 10,
+      },
     button : {
         margin: theme.spacing(1),
     },
     textField :{    
         marginLeft: theme.spacing(1),
-    }
+    },
 }));
 
 const SearchBar = props =>{
@@ -24,30 +36,32 @@ const SearchBar = props =>{
         //     />
         //     <button onClick={props.onSearch}>Search</button>
         // </div>
-        <React.Fragment className={classes.root} >
+        <React.Fragment >
             <CssBaseline />
             <Grid container maxWidth="xs">
-                <Grid item xs={10}>
-                    <TextField 
-                    fullWidth
-                    className={classes.textField}
-                    id="standard-basic" 
-                    label="Search" 
-                    value={props.value}
-                    onChange={props.onChange}
+                <Paper className={classes.root}>
+                    <InputBase
+                        value={props.value}
+                        onChange={props.onChange}
+                        
+                        className={classes.input}
+                        placeholder="Search"
+                        inputProps={{
+                            'aria-label': 'search '
+                        }}
                     />
-                </Grid>
-                <Grid item xs={2}>
-                    <Button
-                        className={classes.button}
-                        variant="contained"
-                        size="medium"
-                        color="primary"
+                    <IconButton
+                        type="submit"
+                        className={classes.iconButton}
                         onClick={props.onSearch}
-                    >Search
-                    </Button>
-                </Grid>
-                    
+                        aria-label="search"
+                        
+                        >
+                        <SearchIcon />
+                    </IconButton>
+                </Paper>
+                
+
             </Grid>
         </React.Fragment>
 

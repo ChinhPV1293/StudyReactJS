@@ -18,14 +18,11 @@ function App() {
             <Login />
           </Route>
           <Route path="/register" component={RegisterAccount} />
-          <Route exact path="/home">
+          <Route path="/home">
             <Home />
           </Route>
           <Route exact path="/detail/:id">
             <Detail />
-          </Route>
-          <Route exact path="/addNewFriend">
-            <AddNewFriend />
           </Route>
           <Route exact path="/registerAccount">
             <RegisterAccount />
