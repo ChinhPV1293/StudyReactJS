@@ -11,11 +11,11 @@ import Divider from '@material-ui/core/Divider';
 import DetailInfoService from '../../service/DetailInfoService';
 import Drawer from '@material-ui/core/Drawer';
 import AddNewFriend from './AddNewFriend/AddNewFriend';
-import {Link,Switch,Route,BrowserRouter as Router, useRouteMatch } from "react-router-dom";
-import { CssBaseline, Container, Typography, makeStyles, List, AppBar, Toolbar, Badge, Box, Grid, Paper  } from '@material-ui/core';
-import {ListItems,secondaryListItems} from './ListItems/ListItem';
+import { Link, Switch, Route, BrowserRouter as Router, useRouteMatch } from "react-router-dom";
+import { CssBaseline, Container, Typography, makeStyles, List, AppBar, Toolbar, Badge, Box, Grid, Paper } from '@material-ui/core';
+import { ListItems, secondaryListItems } from './ListItems/ListItem';
 import Copyright from "../Utils/Copyright";
-
+import Avatar from '@material-ui/core/Avatar';
 const drawerWidth = 240;
 
 
@@ -98,7 +98,7 @@ const useStyles = makeStyles((theme) => ({
         height: 240,
     },
     searchBar: {
-        
+
     }
 }));
 
@@ -106,7 +106,7 @@ const Home = props => {
     let { path, url } = useRouteMatch();
     const classes = useStyles();
     const history = useHistory();
-    const [searchTerm,setSearchTerm] = React.useState("");
+    const [searchTerm, setSearchTerm] = React.useState("");
     const [open, setOpen] = React.useState(true);
     const [contactList, setContactList] = React.useState(DetailInfoService.getAll());
 
@@ -124,11 +124,11 @@ const Home = props => {
     }
     const handleSearch = (event) => {
         debugger;
-        let result= DetailInfoService.getByName(searchTerm);
-        result=
-        setContactList(
-            result
-        );
+        let result = DetailInfoService.getByName(searchTerm);
+        result =
+            setContactList(
+                result
+            );
     }
     const handleChange = event => {
         setSearchTerm(
@@ -136,16 +136,6 @@ const Home = props => {
         );
     }
     return (
-<<<<<<< HEAD
-        <div>
-            <Header />
-            <Link to="/addNewFriend" >Add new friend</Link>
-            <SearchBar
-                value={searchTerm}
-                onSearch={handleSearch}
-                onChange={handleChange} />
-            <ListContact value={contactList} />    
-=======
         <div className={classes.root}>
             <CssBaseline />
             <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
@@ -168,12 +158,13 @@ const Home = props => {
                             value={searchTerm}
                             onSearch={handleSearch}
                             onChange={handleChange} />
-                    </Box>   
+                    </Box>
                     <IconButton color="inherit">
                         <Badge badgeContent={4} color="secondary">
                             <NotificationsIcon />
                         </Badge>
                     </IconButton>
+                    <Avatar alt="Remy Sharp" src="https://img.thuthuatphanmem.vn/uploads/2018/09/22/anh-avatar-den_015639048.png" className={classes.small} />
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -209,15 +200,12 @@ const Home = props => {
                             </Switch>
                         </Grid>
                     </Grid>
-                    <Box pt={4}>
+                    {/* <Box pt={4}>
                         <Copyright />
-                    </Box>
+                    </Box> */}
                 </Container>
             </main>
->>>>>>> chinhpv3_dev
         </div>
-                                
-        
     );
 }
 

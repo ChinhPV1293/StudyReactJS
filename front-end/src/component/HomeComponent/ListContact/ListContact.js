@@ -2,7 +2,7 @@ import React from 'react';
 import '../../../App.css';
 import {Link, useHistory} from "react-router-dom";
 import DetailInfoService from '../../../service/DetailInfoService';
-import image1 from '../../../static/images/avatar/1.jpg';
+// import image1 from '../../../static/images/avatar/1.jpg';
 import { CssBaseline, 
     Container, 
     Typography, 
@@ -37,9 +37,9 @@ const ListContact = props => {
                 {
                     ContactList.map((contact, index) => <ul key={index}>
                         <ListItem button>
-                            <ListItemAvatar>
+                            {/* <ListItemAvatar>
                                 <Avatar alt="Remy Sharp" src= {image1} />
-                            </ListItemAvatar>
+                            </ListItemAvatar> */}
                             <ListItemText
                                 onClick={(event) => handleClick(event, contact.id)}
                                 primary={contact.lastName + " " + contact.firstName} />

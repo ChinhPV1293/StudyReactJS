@@ -1,10 +1,11 @@
-import React, {useState} from "react";
-import {useHistory} from "react-router-dom";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import RegisterAccount from "./RegisterForm/RegisterAccount";
 import LoginForm from "./LoginForm/LoginForm";
-import {Button} from '@material-ui/core';
+import { Button } from '@material-ui/core';
+
 const Login = props => {
-    const history= useHistory();
+    const history = useHistory();
 
     const [value, setValue] = React.useState({
         userName: '',
@@ -12,16 +13,16 @@ const Login = props => {
     });
 
     const handleSubmit = (event) => {
-        if(value.userName ==="Hung" && value.passWord==="Hung"){
+        if (value.userName === "Hung" && value.passWord === "Hung") {
             history.push('/home');
         }
-        else{
+        else {
             alert("Wrong password");
             event.preventDefault();
             setValue({
                 ...value,
-                userName :'',
-                passWord :'',
+                userName: '',
+                passWord: '',
             })
         }
     };
@@ -43,9 +44,9 @@ const Login = props => {
                 onChange={handleChange}
                 onSubmit={handleSubmit}
                 value={value} />
-            <Button variant="contained" color="primary" onClick={Register}>
+            {/* <Button variant="contained" color="primary" onClick={Register}>
                 Register
-            </Button>
+            </Button> */}
         </React.Fragment>
     );
 }
