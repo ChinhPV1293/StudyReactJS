@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useEffect } from 'react';
+import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import ListContact from './ListContact/ListContact';
 import SearchBar from './SearchBar/SearchBar';
@@ -11,10 +12,28 @@ import Divider from '@material-ui/core/Divider';
 import DetailInfoService from '../../service/DetailInfoService';
 import Drawer from '@material-ui/core/Drawer';
 import AddNewFriend from './AddNewFriend/AddNewFriend';
+import GroupComponent from './GroupComponent/GroupComponent';
 import {Link,Switch,Route,BrowserRouter as Router, useRouteMatch } from "react-router-dom";
-import { CssBaseline, Container, Typography, makeStyles, List, AppBar, Toolbar, Badge, Box, Grid, Paper  } from '@material-ui/core';
+import { CssBaseline, 
+    Container, 
+    Typography, 
+    makeStyles, 
+    List, 
+    AppBar, 
+    Toolbar, 
+    Badge, 
+    Box, 
+    Grid, 
+    Paper, 
+    Button, 
+    Avatar,
+    ListItem,
+    ListItemAvatar,
+    ListItemText
+ } from '@material-ui/core';
 import {ListItems,secondaryListItems} from './ListItems/ListItem';
 import Copyright from "../Utils/Copyright";
+import {image1} from '../Utils/Image';
 
 const drawerWidth = 240;
 
@@ -108,8 +127,25 @@ const Home = props => {
     const history = useHistory();
     const [searchTerm,setSearchTerm] = React.useState("");
     const [open, setOpen] = React.useState(true);
-    const [contactList, setContactList] = React.useState(DetailInfoService.getAll());
+    const [contactList, setContactList] = React.useState([]);
 
+    useEffect(() => {
+        const token= JSON.parse(localStorage.getItem("token"));
+        let config = {
+            headers: {
+              'Authorization': 'Token ' + token
+            }
+        }
+        const fetchData = async () => {
+          const result = await axios(
+            'http://127.0.0.1:8000/friend/',config
+          );
+          setContactList(result.data.results);
+          debugger;
+          
+        };
+        fetchData();
+      }, []);
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -135,6 +171,9 @@ const Home = props => {
             event.target.value
         );
     }
+    const handleLogout= event =>{
+        history.push('/');
+    }
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -158,12 +197,16 @@ const Home = props => {
                             value={searchTerm}
                             onSearch={handleSearch}
                             onChange={handleChange} />
-                    </Box>   
+                    </Box>
+                    <Avatar alt="Avatar" src={image1} />
                     <IconButton color="inherit">
                         <Badge badgeContent={4} color="secondary">
                             <NotificationsIcon />
                         </Badge>
                     </IconButton>
+                    <Button variant="contained" onClick={handleLogout}>
+                        Logout
+                    </Button>
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -188,13 +231,16 @@ const Home = props => {
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={3}>
                         <Grid xs={10}>
-                            <Switch>
+                             <Switch>
                                 {/* define a component arrive */}
                                 <Route exact path={path}>
                                     <ListContact value={contactList} />
                                 </Route>
                                 <Route path={`${path}/addNewFriend`}>
                                     <AddNewFriend />
+                                </Route>
+                                <Route path={`${path}/groupComponent`}>
+                                    <GroupComponent />
                                 </Route>
                             </Switch>
                         </Grid>
