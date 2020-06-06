@@ -1,7 +1,9 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
-from FriendManagement.Management.serializers import UserSerializer, GroupSerializer
+from .models import FriendInfomation
+from Management.serializers import UserSerializer, GroupSerializer, FriendInfomationSerializer
+from rest_framework.authentication import TokenAuthentication
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -19,4 +21,10 @@ class GroupViewSet(viewsets.ModelViewSet):
     """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+class FriendInfomationViewSet(viewsets.ModelViewSet):
+    serializer_class= FriendInfomationSerializer
+    queryset= FriendInfomation.objects.all()
+    authentication_class=[TokenAuthentication,]
     permission_classes = [permissions.IsAuthenticated]

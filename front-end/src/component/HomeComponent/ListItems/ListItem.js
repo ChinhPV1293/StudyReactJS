@@ -39,7 +39,7 @@ export const ListItems = props =>{
           </ListItemIcon>
           <ListItemText primary="Add" />
         </ListItem>
-        <ListItem button>
+        <ListItem button onClick={event => handleClick(event, 'groupComponent')}>
           <ListItemIcon>
             <PeopleIcon />
           </ListItemIcon>

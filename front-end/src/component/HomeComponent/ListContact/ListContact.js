@@ -1,22 +1,23 @@
 import React from 'react';
 import '../../../App.css';
-import {Link, useHistory} from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import DetailInfoService from '../../../service/DetailInfoService';
-// import image1 from '../../../static/images/avatar/1.jpg';
-import { CssBaseline, 
-    Container, 
-    Typography, 
+import { image1 } from '../../Utils/Image';
+import {
+    CssBaseline,
+    Container,
+    Typography,
     List,
     ListItemText,
     makeStyles,
     ListItem,
     ListItemAvatar,
     Avatar,
- } from '@material-ui/core';
+} from '@material-ui/core';
 
-const useStyles = makeStyles((theme)=>({
+const useStyles = makeStyles((theme) => ({
     root: {
-        flexGrow : 1,
+        flexGrow: 1,
     },
     inline: {
         display: 'inline',
@@ -24,11 +25,11 @@ const useStyles = makeStyles((theme)=>({
 }));
 
 const ListContact = props => {
-    const classes= useStyles();
-    const ContactList= props.value;
-    const history= useHistory();
-    const handleClick= (event,value) => {
-        history.push("/detail/"+ value);
+    const classes = useStyles();
+    const ContactList = props.value;
+    const history = useHistory();
+    const handleClick = (event, value) => {
+        history.push("/detail/" + value);
     }
     return (
         <React.Fragment>
@@ -47,7 +48,7 @@ const ListContact = props => {
                     </ul>)
                 }
             </List>
-        </React.Fragment>); 
+        </React.Fragment>);
 }
 
 export default ListContact;

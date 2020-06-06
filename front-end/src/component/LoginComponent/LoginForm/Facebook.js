@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import FacebookLogin from 'react-facebook-login'
-
+import { Redirect } from 'react-router-dom'
 export default class Facebook extends Component {
     state = {
         isLoggedIn: false,
@@ -11,7 +11,15 @@ export default class Facebook extends Component {
     }
 
     responseFacebook = response => {
-        console.log(response)
+        // console.log(response)
+        this.setState({
+            isLoggedIn: true,
+            userID: response.userID,
+            name: response.name,
+            email: response.email,
+            picture: response.picture.data.url
+        })
+
     }
     componentClicked = () => console.log("clicked");
 
