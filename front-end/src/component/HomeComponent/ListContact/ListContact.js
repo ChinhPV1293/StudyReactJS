@@ -42,7 +42,7 @@ const ListContact = props => {
                             </ListItemAvatar>
                             <ListItemText
                                 onClick={(event) => handleClick(event, contact.id)}
-                                primary={contact.lastName + " " + contact.firstName} />
+                                primary={contact.nameFriend} />
                         </ListItem>
                     </ul>)
                 }

@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User, Group
-from .models import FriendInfomation
+from .models import FriendInfomation, Group_Friend
 from rest_framework import serializers
 
 
@@ -14,7 +14,21 @@ class GroupSerializer (serializers.HyperlinkedModelSerializer):
         model = Group
         fields = ['url', 'name']
 
+
+class GroupFriendSerializer(serializers.ModelSerializer) :
+    class Meta:
+        model= Group_Friend
+        fields = ['nameGroup', 'description']
+
 class FriendInfomationSerializer(serializers.ModelSerializer):
+    groups = GroupFriendSerializer(many=True)
     class Meta:
         model = FriendInfomation
-        fields = ['lastName', 'firstName', 'is_Men', 'Birthday']
+        fields = ['id', 'nameFriend', 'is_Men', 'Birthday', 'phoneNumber', 'address','groups']
+
+class FriendMiniInfomationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FriendInfomation
+        fields = ['id', 'nameFriend','is_Men', 'Birthday', 'phoneNumber', 'address', 'groups']
+
+    

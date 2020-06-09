@@ -4,6 +4,7 @@ import RegisterAccount from "./RegisterForm/RegisterAccount";
 import LoginForm from "./LoginForm/LoginForm";
 import {Button} from '@material-ui/core';
 import axios from 'axios';
+import {loginUrl} from '../Utils/Constant';
 
 const Login = props => {
     const history= useHistory();
@@ -14,23 +15,11 @@ const Login = props => {
     });
 
     const handleSubmit = (event) => {
-        // if(value.userName ==="Hung" && value.passWord==="Hung"){
-        //     history.push('/home');
-        // }
-        // else{
-        //     alert("Wrong password");
-        //     event.preventDefault();
-        //     setValue({
-        //         ...value,
-        //         userName :'',
-        //         passWord :'',
-        //     })
-        // }
         const user={
             username: value.userName,
             password: value.passWord
         }; 
-        axios.post(`http://127.0.0.1:8000/auth/`, 
+        axios.post(`${loginUrl}auth/`, 
             user)
             .then(res => {
                 console.log(res.data.token);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { makeStyles,
     Paper,
     Grid,
@@ -8,6 +8,8 @@ import { makeStyles,
     Typography,
     Box } from '@material-ui/core';
 import {image2} from '../../Utils/Image';
+import axios from 'axios';
+import {baseUrl} from '../../Utils/Constant';
 
 const useStyles= makeStyles((theme) =>({
     root: {
@@ -26,38 +28,66 @@ const useStyles= makeStyles((theme) =>({
 }) )
 const GroupComponent = props =>{
     const classes = useStyles();
+    const [listGroup,setListGroup] = useState([]);
+
+    useEffect(() => {
+        const token= JSON.parse(localStorage.getItem("token"));
+        let config = {
+            headers: {
+              'Authorization': 'Token ' + token
+            }
+        }
+        const fetchData = async () => {
+          const result = await axios(
+            baseUrl+'group_friends/',config
+          );
+          setListGroup(result.data.results);
+          console.log(result);
+          debugger;
+          
+        };
+        fetchData();
+      }, []);
+
     return(
         <div className={classes.root}>
             <Grid container spacing={3}>
-                <Grid item xs={3}>
-                    <Paper className={classes.paper}>
-                        <CardActionArea>
-                            <CardMedia
-                                component="img"
-                                className={classes.media}
-                                image= {image2}
-                                title="Contemplative Reptile"
-                            />
-                            <CardContent>
-                                <Typography gutterBottom variant="h5" component="h2">
-                                    Bạn Cũ UIT
-                                </Typography>
-                                <Typography variant="body2" color="textSecondary" component="p">
-                                    <Box
-                                            component="div"
-                                            textOverflow="ellipsis"
-                                            overflow="hidden"
-                                            bgcolor="background.paper"
-                                        >
-                                    Những Người bạn cùng học tại trường UIT
-                                    </Box>
-                                </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                    </Paper>
-                </Grid>
+                {
+                    listGroup.map((group, index) =>
+                        <Grid key={index} item xs={3} className="classes.myCard">
+                            <Paper className={classes.paper}>
 
-                <Grid item xs={3} className="classes.myCard">
+                                <CardActionArea>
+                                    <CardMedia
+                                        component="img"
+                                        className={classes.media}
+                                        image={image2}
+                                        title="Contemplative Reptile"
+                                    />
+                                    <CardContent>
+                                        <Typography gutterBottom variant="h5" component="h2">
+                                            {group.nameGroup}
+                                        </Typography>
+                                        <Typography variant="body2" color="textSecondary" component="p">
+                                            <Box
+                                                component="div"
+                                                textOverflow="ellipsis"
+                                                overflow="hidden"
+                                                bgcolor="background.paper"
+                                            >
+                                                {group.description}
+                                            </Box>
+                                        </Typography>
+                                    </CardContent>
+                                </CardActionArea>
+                            </Paper>
+
+                        </Grid>
+                    )
+                }
+                     
+                
+                 {/* <Grid item xs={3} className="classes.myCard">
                     <Paper className={classes.paper}>
                         <CardActionArea>
                             <CardMedia
@@ -83,37 +113,11 @@ const GroupComponent = props =>{
                             </CardContent>
                         </CardActionArea>
                     </Paper>
-                </Grid>
+                </Grid> */}
 
-                <Grid item xs={3} className="classes.myCard">
-                    <Paper className={classes.paper}>
-                        <CardActionArea>
-                            <CardMedia
-                                component="img"
-                                className={classes.media}
-                                image= {image2}
-                                title="Contemplative Reptile"
-                            />
-                            <CardContent>
-                                <Typography gutterBottom variant="h5" component="h2">
-                                    Bạn Cũ cấp 3
-                                </Typography>
-                                <Typography variant="body2" color="textSecondary" component="p">
-                                    <Box
-                                        component="div"
-                                        textOverflow="ellipsis"
-                                        overflow="hidden"
-                                        bgcolor="background.paper"
-                                    >
-                                        Những Người bạn cùng học tại trường Cấp 3 Lê Quý Đôn
-                                    </Box>
-                                </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                    </Paper>
-                </Grid>
+                
 
-                <Grid item xs={3} className="classes.myCard">
+                {/* <Grid item xs={3} className="classes.myCard">
                     <Paper className={classes.paper}>
                         <CardActionArea>
                             <CardMedia
@@ -166,9 +170,9 @@ const GroupComponent = props =>{
                             </CardContent>
                         </CardActionArea>
                     </Paper>
+                </Grid> */}
                 </Grid>
-            </Grid>
-        </div>   
+        </div >   
     );
 }
 

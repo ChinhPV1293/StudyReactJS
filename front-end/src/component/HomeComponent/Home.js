@@ -34,6 +34,7 @@ import { CssBaseline,
 import {ListItems,secondaryListItems} from './ListItems/ListItem';
 import Copyright from "../Utils/Copyright";
 import {image1} from '../Utils/Image';
+import {baseUrl} from '../Utils/Constant';
 
 const drawerWidth = 240;
 
@@ -138,14 +139,13 @@ const Home = props => {
         }
         const fetchData = async () => {
           const result = await axios(
-            'http://127.0.0.1:8000/friend/',config
+            baseUrl+'friend_mini/',config
           );
           setContactList(result.data.results);
-          debugger;
-          
         };
         fetchData();
       }, []);
+
     const handleDrawerOpen = () => {
         setOpen(true);
     };
