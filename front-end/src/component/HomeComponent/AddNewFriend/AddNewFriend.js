@@ -1,6 +1,7 @@
 import React from 'react';
 import DetailInfoService from '../../../service/DetailInfoService';
 
+<<<<<<< HEAD
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -27,15 +28,23 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(2),
     },
 }));
+=======
+import {useHistory} from 'react-router-dom';
+import axios from 'axios';
+import {baseUrl} from '../../Utils/Constant';
+
+>>>>>>> 9bcab941477076576d21cb720139fa58960252c6
 
 const AddNewFriend = props => {
     const classes = useStyles();
     const history = new useHistory();
     const [Info, setInfo] = React.useState({
-        firstName: '',
-        lastName: '',
+        Name: '',
+        is_Men : false,
         birthday: '',
         phoneNumber: '',
+        Address :'',
+        groups: [3],
     });
     const handleChange = (event, props) => {
         setInfo({
@@ -44,6 +53,7 @@ const AddNewFriend = props => {
         }
         )
     };
+<<<<<<< HEAD
     const handleSubmit = event => {
         alert(Info.lastName + Info.firstName);
 
@@ -110,6 +120,61 @@ const AddNewFriend = props => {
                         name="phoneNumber"
                         label="Phone Number"
                         fullWidth
+=======
+    const handleSubmit = event =>{
+        // alert(Info.lastName+Info.firstName);
+        // debugger;
+        // DetailInfoService.addNewFriend(Info);
+        // history.push('/home');
+        const account= {
+            nameFriend : Info.Name,
+            is_Men : Info.is_Men,
+            Birthday : Info.Birthday,
+            phoneNumber : Info.PhoneNumber,
+            address : Info.Address,
+            groups : Info.groups
+        };
+        const token= JSON.parse(localStorage.getItem("token"));
+        let config = {
+            headers: {
+              'Authorization': 'Token ' + token
+            }
+        }
+        axios.post(`${baseUrl}friend_mini/`, 
+            account,config)
+            .then(res => {
+                console.log(res.data);
+                debugger;
+                history.push('/detail/'+ res.data.id);
+            })
+            .catch(e => {
+                alert("Wrong password");
+                event.preventDefault();
+            })
+        event.preventDefault();
+    };
+    return (
+        <div>
+            <form onSubmit={handleSubmit}>
+                <label>
+                    Full Name
+                    <input
+                        type="text"
+                        value={Info.Name}
+                        onChange={event => handleChange(event,'Name')} />
+                </label><br />
+                <label>
+                    Birthday
+                    <input
+                        type="text"
+                        value={Info.birthday}
+                        onChange={event => handleChange(event,'birthday')} />
+                </label><br />
+                <label>
+                    phoneNumber
+                    <input
+                        type="text"
+>>>>>>> 9bcab941477076576d21cb720139fa58960252c6
                         value={Info.phoneNumber}
                         onChange={event => handleChange(event, 'phoneNumber')}
                         autoComplete="phonenumber"

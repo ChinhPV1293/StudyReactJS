@@ -1,4 +1,12 @@
 from django.contrib import admin
-from .models import FriendInfomation
+from .models import FriendInfomation, Group_Friend
 
-admin.site.register(FriendInfomation)
+@admin.register(FriendInfomation)
+class FriendInfomationAdmin(admin.ModelAdmin):
+    display = ['nameFriend']
+
+@admin.register(Group_Friend)
+class GroupInfoAdmin(admin.ModelAdmin):
+    display = ['nameGroup']
+
+

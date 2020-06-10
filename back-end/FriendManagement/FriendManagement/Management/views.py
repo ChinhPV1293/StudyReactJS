@@ -1,8 +1,10 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
-from rest_framework import permissions
-from .models import FriendInfomation
-from Management.serializers import UserSerializer, GroupSerializer, FriendInfomationSerializer
+from rest_framework import permissions, status
+from rest_framework.response import Response
+from .models import FriendInfomation, Group_Friend
+from rest_framework.decorators import action
+from .serializers import UserSerializer, GroupSerializer, FriendInfomationSerializer, GroupFriendSerializer,FriendMiniInfomationSerializer
 from rest_framework.authentication import TokenAuthentication
 
 
@@ -28,3 +30,32 @@ class FriendInfomationViewSet(viewsets.ModelViewSet):
     queryset= FriendInfomation.objects.all()
     authentication_class=[TokenAuthentication,]
     permission_classes = [permissions.IsAuthenticated]
+
+class GroupFriendViewSet(viewsets.ModelViewSet):
+    serializer_class= GroupFriendSerializer
+    queryset= Group_Friend.objects.all()
+    authentication_class=[TokenAuthentication,]
+    permission_classes = [permissions.IsAuthenticated]
+
+class FriendMiniVewSet(viewsets.ModelViewSet):
+    serializer_class= FriendMiniInfomationSerializer
+    queryset= FriendInfomation.objects.all()
+    authentication_class=[TokenAuthentication,]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = FriendInfomationSerializer(instance)
+        return Response(serializer.data)
+
+    # def create(self, request, *args, **kwargs):
+    #     # serializer = self.get_serializer(data=request.data)
+    #     # serializer.is_valid(raise_exception=True)
+    #     # self.perform_create(serializer)
+    #     # headers = self.get_success_headers(serializer.data)
+    #     if 'groups' in request.data:
+    #         id= request.data['groups__id']
+    #         groups= Group.filter(id=id)
+
+
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)

@@ -25,11 +25,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ListContact = props => {
+<<<<<<< HEAD
     const classes = useStyles();
     const ContactList = props.value;
     const history = useHistory();
     const handleClick = (event, value) => {
         history.push("/detail/" + value);
+=======
+    const classes= useStyles();
+    const ContactList= props.value;
+    const history= useHistory();
+    const handleClick= (event,value) => {
+        history.push("/home/detail/"+ value);
+>>>>>>> 9bcab941477076576d21cb720139fa58960252c6
     }
     return (
         <React.Fragment>
@@ -43,7 +51,7 @@ const ListContact = props => {
                             </ListItemAvatar> */}
                             <ListItemText
                                 onClick={(event) => handleClick(event, contact.id)}
-                                primary={contact.lastName + " " + contact.firstName} />
+                                primary={contact.nameFriend} />
                         </ListItem>
                     </ul>)
                 }

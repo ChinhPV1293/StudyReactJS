@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import Home from './component/HomeComponent/Home';
-import Detail from './component/DetailComponent/Detail';
 import Login from './component/LoginComponent/Login';
 import AddNewFriend from './component/HomeComponent/AddNewFriend/AddNewFriend';
 import RegisterAccount from './component/LoginComponent/RegisterForm/RegisterAccount'
@@ -20,9 +19,6 @@ function App() {
           <Route path="/register" component={RegisterAccount} />
           <Route path="/home">
             <Home />
-          </Route>
-          <Route exact path="/detail/:id">
-            <Detail />
           </Route>
           <Route exact path="/registerAccount">
             <RegisterAccount />
