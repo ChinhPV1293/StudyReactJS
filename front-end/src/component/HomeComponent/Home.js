@@ -13,6 +13,7 @@ import DetailInfoService from '../../service/DetailInfoService';
 import Drawer from '@material-ui/core/Drawer';
 import AddNewFriend from './AddNewFriend/AddNewFriend';
 import GroupComponent from './GroupComponent/GroupComponent';
+import Detail from './DetailComponent/Detail';
 import {Link,Switch,Route,BrowserRouter as Router, useRouteMatch } from "react-router-dom";
 import { CssBaseline, 
     Container, 
@@ -241,6 +242,9 @@ const Home = props => {
                                 </Route>
                                 <Route path={`${path}/groupComponent`}>
                                     <GroupComponent />
+                                </Route>
+                                <Route path={`${path}/detail/:id`}>
+                                    <Detail />
                                 </Route>
                             </Switch>
                         </Grid>

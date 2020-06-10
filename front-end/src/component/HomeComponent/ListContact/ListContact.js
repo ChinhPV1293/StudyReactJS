@@ -28,7 +28,7 @@ const ListContact = props => {
     const ContactList= props.value;
     const history= useHistory();
     const handleClick= (event,value) => {
-        history.push("/detail/"+ value);
+        history.push("/home/detail/"+ value);
     }
     return (
         <React.Fragment>
