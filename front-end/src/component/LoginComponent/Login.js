@@ -2,30 +2,23 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import RegisterAccount from "./RegisterForm/RegisterAccount";
 import LoginForm from "./LoginForm/LoginForm";
-import { Button } from '@material-ui/core';
+import { Button, Snackbar } from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert';
 import axios from 'axios';
-
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 const Login = props => {
     const history = useHistory();
-
+    const [open, setOpen] = React.useState(false);
+    const [type, setType] = React.useState('error');
+    const [msg, setMsg] = React.useState('')
     const [value, setValue] = React.useState({
         userName: '',
         passWord: '',
     });
 
     const handleSubmit = (event) => {
-        // if(value.userName ==="Hung" && value.passWord==="Hung"){
-        //     history.push('/home');
-        // }
-        // else{
-        //     alert("Wrong password");
-        //     event.preventDefault();
-        //     setValue({
-        //         ...value,
-        //         userName :'',
-        //         passWord :'',
-        //     })
-        // }
         const user = {
             username: value.userName,
             password: value.passWord
@@ -35,11 +28,13 @@ const Login = props => {
             .then(res => {
                 console.log(res.data.token);
                 localStorage.setItem('token', JSON.stringify(res.data.token));
-                debugger;
                 history.push('/home');
             })
             .catch(e => {
-                alert("Wrong password");
+                setType("error");
+                setMsg(e.message);
+                setOpen(true);
+
                 event.preventDefault();
                 setValue({
                     ...value,
@@ -60,7 +55,7 @@ const Login = props => {
     const Register = (event) => {
         history.push('/registerAccount');
     };
-
+    const handleClose = () => setOpen(false);
     return (
         <React.Fragment>
             <LoginForm
@@ -70,6 +65,16 @@ const Login = props => {
             {/* <Button variant="contained" color="primary" onClick={Register}>
                 Register
             </Button> */}
+            <Snackbar
+                open={open}
+                autoHideDuration={6000}
+                onClose={handleClose}
+                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            >
+                <Alert onClose={handleClose} severity={type}>
+                    {msg}
+                </Alert>
+            </Snackbar>
         </React.Fragment>
     );
 }

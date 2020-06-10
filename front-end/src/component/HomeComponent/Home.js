@@ -141,7 +141,7 @@ const Home = props => {
                 'http://127.0.0.1:8000/friend/', config
             );
             setContactList(result.data.results);
-            debugger;
+
 
         };
         fetchData();
@@ -159,7 +159,7 @@ const Home = props => {
         history.push('/listContact');
     }
     const handleSearch = (event) => {
-        debugger;
+
         let result = DetailInfoService.getByName(searchTerm);
         result =
             setContactList(
