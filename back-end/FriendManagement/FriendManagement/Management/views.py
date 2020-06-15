@@ -4,7 +4,7 @@ from rest_framework import permissions, status
 from rest_framework.response import Response
 from .models import FriendInfomation, Group_Friend
 from rest_framework.decorators import action
-from .serializers import UserSerializer, GroupSerializer, FriendInfomationSerializer, GroupFriendSerializer,FriendMiniInfomationSerializer
+from .serializers import UserSerializer, GroupSerializer, FriendInfomationSerializer, GroupFriendSerializer,FriendMiniInfomationSerializer, ListMemberOfGroupSerializer
 from rest_framework.authentication import TokenAuthentication
 
 
@@ -14,7 +14,7 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
 
 
 class GroupViewSet(viewsets.ModelViewSet):
@@ -37,6 +37,17 @@ class GroupFriendViewSet(viewsets.ModelViewSet):
     authentication_class=[TokenAuthentication,]
     permission_classes = [permissions.IsAuthenticated]
 
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = ListMemberOfGroupSerializer(instance)
+        return Response(serializer.data)
+
+    def list(self, request, *args, **kw):
+        currentUser = request.user
+        queryset= Group_Friend.objects.filter(user=currentUser)
+        serializer = GroupFriendSerializer(queryset, many=True)
+        return Response(serializer.data)
+
 class FriendMiniVewSet(viewsets.ModelViewSet):
     serializer_class= FriendMiniInfomationSerializer
     queryset= FriendInfomation.objects.all()
@@ -48,6 +59,13 @@ class FriendMiniVewSet(viewsets.ModelViewSet):
         serializer = FriendInfomationSerializer(instance)
         return Response(serializer.data)
 
+    def list(self, request, *args, **kw):
+        currentUser = request.user
+        queryset= FriendInfomation.objects.filter(user=currentUser)
+        serializer = FriendMiniInfomationSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
     # def create(self, request, *args, **kwargs):
     #     # serializer = self.get_serializer(data=request.data)
     #     # serializer.is_valid(raise_exception=True)
@@ -58,4 +76,4 @@ class FriendMiniVewSet(viewsets.ModelViewSet):
     #         groups= Group.filter(id=id)
 
 
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+    

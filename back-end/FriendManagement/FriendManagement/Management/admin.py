@@ -10,3 +10,4 @@ class GroupInfoAdmin(admin.ModelAdmin):
     display = ['nameGroup']
 
 
+

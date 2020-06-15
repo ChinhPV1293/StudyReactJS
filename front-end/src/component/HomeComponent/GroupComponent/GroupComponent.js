@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {useHistory} from 'react-router-dom';
 import { makeStyles,
     Paper,
     Grid,
@@ -28,8 +29,11 @@ const useStyles= makeStyles((theme) =>({
 }) )
 const GroupComponent = props =>{
     const classes = useStyles();
+    const history= useHistory();
     const [listGroup,setListGroup] = useState([]);
-
+    const handleClick = (event,value) => {
+        history.push("/home/memberGroup/"+ value);
+    }
     useEffect(() => {
         const token= JSON.parse(localStorage.getItem("token"));
         let config = {
@@ -41,10 +45,9 @@ const GroupComponent = props =>{
           const result = await axios(
             baseUrl+'group_friends/',config
           );
-          setListGroup(result.data.results);
+          setListGroup(result.data);
           console.log(result);
           debugger;
-          
         };
         fetchData();
       }, []);
@@ -57,7 +60,7 @@ const GroupComponent = props =>{
                         <Grid key={index} item xs={3} className="classes.myCard">
                             <Paper className={classes.paper}>
 
-                                <CardActionArea>
+                                <CardActionArea onClick= { (event) => handleClick(event, group.id)}>
                                     <CardMedia
                                         component="img"
                                         className={classes.media}

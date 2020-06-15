@@ -14,6 +14,7 @@ import Drawer from '@material-ui/core/Drawer';
 import AddNewFriend from './AddNewFriend/AddNewFriend';
 import GroupComponent from './GroupComponent/GroupComponent';
 import Detail from './DetailComponent/Detail';
+import ListMemberOfGroup from './GroupComponent/ListMemberOfGroup';
 import {Link,Switch,Route,BrowserRouter as Router, useRouteMatch } from "react-router-dom";
 import { CssBaseline, 
     Container, 
@@ -140,9 +141,11 @@ const Home = props => {
         }
         const fetchData = async () => {
           const result = await axios(
-            baseUrl+'friend_mini/',config
+            baseUrl+'friend_mini/',config  
           );
-          setContactList(result.data.results);
+          setContactList(result.data);
+          console.log(contactList);
+          debugger;
         };
         fetchData();
       }, []);
@@ -245,6 +248,9 @@ const Home = props => {
                                 </Route>
                                 <Route path={`${path}/detail/:id`}>
                                     <Detail />
+                                </Route>
+                                <Route path={`${path}/memberGroup/:id`}>
+                                    <ListMemberOfGroup />
                                 </Route>
                             </Switch>
                         </Grid>
