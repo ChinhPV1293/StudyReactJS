@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import ListContact from './ListContact/ListContact';
@@ -13,22 +13,6 @@ import DetailInfoService from '../../service/DetailInfoService';
 import Drawer from '@material-ui/core/Drawer';
 import AddNewFriend from './AddNewFriend/AddNewFriend';
 import GroupComponent from './GroupComponent/GroupComponent';
-<<<<<<< HEAD
-import { Link, Switch, Route, BrowserRouter as Router, useRouteMatch } from "react-router-dom";
-import {
-    CssBaseline,
-    Container,
-    Typography,
-    makeStyles,
-    List,
-    AppBar,
-    Toolbar,
-    Badge,
-    Box,
-    Grid,
-    Paper,
-    Button,
-=======
 import Detail from './DetailComponent/Detail';
 import {Link,Switch,Route,BrowserRouter as Router, useRouteMatch } from "react-router-dom";
 import { CssBaseline, 
@@ -43,21 +27,16 @@ import { CssBaseline,
     Grid, 
     Paper, 
     Button, 
->>>>>>> 9bcab941477076576d21cb720139fa58960252c6
     Avatar,
     ListItem,
     ListItemAvatar,
     ListItemText
-} from '@material-ui/core';
-import { ListItems, secondaryListItems } from './ListItems/ListItem';
+ } from '@material-ui/core';
+import {ListItems,secondaryListItems} from './ListItems/ListItem';
 import Copyright from "../Utils/Copyright";
-<<<<<<< HEAD
-import { image1 } from '../Utils/Image';
-=======
 import {image1} from '../Utils/Image';
 import {baseUrl} from '../Utils/Constant';
 
->>>>>>> 9bcab941477076576d21cb720139fa58960252c6
 const drawerWidth = 240;
 
 
@@ -140,7 +119,7 @@ const useStyles = makeStyles((theme) => ({
         height: 240,
     },
     searchBar: {
-
+        
     }
 }));
 
@@ -148,29 +127,18 @@ const Home = props => {
     let { path, url } = useRouteMatch();
     const classes = useStyles();
     const history = useHistory();
-    const [searchTerm, setSearchTerm] = React.useState("");
+    const [searchTerm,setSearchTerm] = React.useState("");
     const [open, setOpen] = React.useState(true);
     const [contactList, setContactList] = React.useState([]);
 
     useEffect(() => {
-        const token = JSON.parse(localStorage.getItem("token"));
+        const token= JSON.parse(localStorage.getItem("token"));
         let config = {
             headers: {
-                'Authorization': 'Token ' + token
+              'Authorization': 'Token ' + token
             }
         }
         const fetchData = async () => {
-<<<<<<< HEAD
-            const result = await axios(
-                'http://127.0.0.1:8000/friend/', config
-            );
-            setContactList(result.data.results);
-
-
-        };
-        fetchData();
-    }, []);
-=======
           const result = await axios(
             baseUrl+'friend_mini/',config
           );
@@ -179,7 +147,6 @@ const Home = props => {
         fetchData();
       }, []);
 
->>>>>>> 9bcab941477076576d21cb720139fa58960252c6
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -193,19 +160,19 @@ const Home = props => {
         history.push('/listContact');
     }
     const handleSearch = (event) => {
-
-        let result = DetailInfoService.getByName(searchTerm);
-        result =
-            setContactList(
-                result
-            );
+        debugger;
+        let result= DetailInfoService.getByName(searchTerm);
+        result=
+        setContactList(
+            result
+        );
     }
     const handleChange = event => {
         setSearchTerm(
             event.target.value
         );
     }
-    const handleLogout = event => {
+    const handleLogout= event =>{
         history.push('/');
     }
     return (
@@ -265,7 +232,7 @@ const Home = props => {
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={3}>
                         <Grid xs={10}>
-                            <Switch>
+                             <Switch>
                                 {/* define a component arrive */}
                                 <Route exact path={path}>
                                     <ListContact value={contactList} />
@@ -282,12 +249,14 @@ const Home = props => {
                             </Switch>
                         </Grid>
                     </Grid>
-                    {/* <Box pt={4}>
+                    <Box pt={4}>
                         <Copyright />
-                    </Box> */}
+                    </Box>
                 </Container>
             </main>
         </div>
+                                
+        
     );
 }
 
