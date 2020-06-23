@@ -13,7 +13,7 @@ import DetailInfoService from '../../service/DetailInfoService';
 import Drawer from '@material-ui/core/Drawer';
 import AddNewFriend from './AddNewFriend/AddNewFriend';
 import GroupComponent from './GroupComponent/GroupComponent';
-import Detail from './DetailComponent/Detail';
+<<<<<<< HEAD
 import { Link, Switch, Route, BrowserRouter as Router, useRouteMatch } from "react-router-dom";
 import {
     CssBaseline,
@@ -28,6 +28,22 @@ import {
     Grid,
     Paper,
     Button,
+=======
+import Detail from './DetailComponent/Detail';
+import {Link,Switch,Route,BrowserRouter as Router, useRouteMatch } from "react-router-dom";
+import { CssBaseline, 
+    Container, 
+    Typography, 
+    makeStyles, 
+    List, 
+    AppBar, 
+    Toolbar, 
+    Badge, 
+    Box, 
+    Grid, 
+    Paper, 
+    Button, 
+>>>>>>> 9bcab941477076576d21cb720139fa58960252c6
     Avatar,
     ListItem,
     ListItemAvatar,
@@ -35,8 +51,13 @@ import {
 } from '@material-ui/core';
 import { ListItems, secondaryListItems } from './ListItems/ListItem';
 import Copyright from "../Utils/Copyright";
+<<<<<<< HEAD
 import { image1 } from '../Utils/Image';
-import { baseUrl } from '../Utils/Constant';
+=======
+import {image1} from '../Utils/Image';
+import {baseUrl} from '../Utils/Constant';
+
+>>>>>>> 9bcab941477076576d21cb720139fa58960252c6
 const drawerWidth = 240;
 
 
@@ -139,14 +160,26 @@ const Home = props => {
             }
         }
         const fetchData = async () => {
+<<<<<<< HEAD
             const result = await axios(
-                baseUrl + 'friend_mini/', config
+                'http://127.0.0.1:8000/friend/', config
             );
             setContactList(result.data.results);
+
+
         };
         fetchData();
     }, []);
+=======
+          const result = await axios(
+            baseUrl+'friend_mini/',config
+          );
+          setContactList(result.data.results);
+        };
+        fetchData();
+      }, []);
 
+>>>>>>> 9bcab941477076576d21cb720139fa58960252c6
     const handleDrawerOpen = () => {
         setOpen(true);
     };

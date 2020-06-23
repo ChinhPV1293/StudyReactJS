@@ -5,11 +5,14 @@ import LoginForm from "./LoginForm/LoginForm";
 import { Button, Snackbar } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
 import axios from 'axios';
-import { loginUrl } from '../Utils/Constant';
-
+<<<<<<< HEAD
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
+=======
+import {loginUrl} from '../Utils/Constant';
+
+>>>>>>> 9bcab941477076576d21cb720139fa58960252c6
 const Login = props => {
     const history = useHistory();
     const [open, setOpen] = React.useState(false);
@@ -21,16 +24,19 @@ const Login = props => {
     });
 
     const handleSubmit = (event) => {
-        // const user = {
-        //     username: value.userName,
-        //     password: value.passWord
-        // };
-        // axios.post(`http://127.0.0.1:8000/auth/`,
+<<<<<<< HEAD
         const user = {
             username: value.userName,
             password: value.passWord
         };
-        axios.post(`${loginUrl}auth/`,
+        axios.post(`http://127.0.0.1:8000/auth/`,
+=======
+        const user={
+            username: value.userName,
+            password: value.passWord
+        }; 
+        axios.post(`${loginUrl}auth/`, 
+>>>>>>> 9bcab941477076576d21cb720139fa58960252c6
             user)
             .then(res => {
                 console.log(res.data.token);
