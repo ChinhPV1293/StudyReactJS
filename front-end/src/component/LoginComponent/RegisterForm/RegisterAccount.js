@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import { makeStyles,withStyles } from '@material-ui/core/styles';
 import {
     Avatar,
@@ -15,7 +15,8 @@ import {
 } from '@material-ui/core';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import Copyright from "../../Utils/Copyright";
-   
+import axios from 'axios';
+import {baseUrl} from '../../Utils/Constant';
 
 const StyledButton = withStyles({
     root: {
@@ -70,10 +71,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const RegisterAccount = props => {
+    const history= useHistory();
     const [accountInfo, setAccountInfo] = React.useState({
         lastName: '',
         firstName: '',
         birthday: '',
+        email: '',
         phoneNumber: '',
         userNameRegister: '',
         passWordRegister: '',
@@ -86,8 +89,33 @@ const RegisterAccount = props => {
         });
     };
     const handleSubmit = (event, props) => {
-        alert("register success");
-        console.log(accountInfo);
+        const newAccount= {
+            last_name : accountInfo.lastName,
+            first_name : accountInfo.firstName,
+            // birthday : accountInfo.birthday,
+            // gender : accountInfo.gender,
+            email : accountInfo.email,
+            // phoneNumber : accountInfo.phoneNumber,
+            username : accountInfo.userNameRegister,
+            password : accountInfo.passWordRegister
+        };
+        // const token= JSON.parse(localStorage.getItem("token"));
+        // let config = {
+        //     headers: {
+        //       'Authorization': 'Token ' + token
+        //     }
+        // }
+        axios.post(`${baseUrl}users/`, 
+            newAccount)
+            .then(res => {
+                console.log(res.data);
+                debugger;
+                history.push('/');
+            })
+            .catch(e => {
+                alert(e);
+                event.preventDefault();
+            })
         event.preventDefault();
     }
     const classes = useStyles();
@@ -129,7 +157,6 @@ const RegisterAccount = props => {
                                 name="lastName"
                                 value={accountInfo.firstName}
                                 onChange={event => handleChange(event, 'firstName')}
-                                autoComplete="lname"
                             />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -140,6 +167,8 @@ const RegisterAccount = props => {
                                 fullWidth
                                 defaultValue="2017-05-24"
                                 className={classes.textField}
+                                value={accountInfo.birthday}
+                                onChange={event => handleChange(event, 'birthday')}
                                 InputLabelProps={{
                                 shrink: true,
                                 }}
@@ -154,7 +183,17 @@ const RegisterAccount = props => {
                                 name="gender"
                                 value={accountInfo.gender}
                                 onChange={event => handleChange(event, 'gender')}
-                                autoComplete="gender"
+                            />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                            <TextField
+                                variant="outlined"
+                                fullWidth
+                                id="email"
+                                label="Email"
+                                name="email"
+                                value={accountInfo.email}
+                                onChange={event => handleChange(event, 'email')}
                             />
                             </Grid>
                             <Grid item xs={12}>
@@ -167,26 +206,26 @@ const RegisterAccount = props => {
                                 name="phonenumber"
                                 value={accountInfo.phoneNumber}
                                 onChange={event => handleChange(event, 'phoneNumber')}
-                                autoComplete="phonenumber"
                             />
                             </Grid>
                             <Grid item xs={12}>
                             <TextField
                                 variant="outlined"
                                 required
+                                autoComplete="off"
                                 fullWidth
                                 id="username"
                                 label="Username"
                                 name="username"
                                 value={accountInfo.userNameRegister}
                                 onChange={event => handleChange(event, 'userNameRegister')}
-                                autoComplete="phonenumber"
                             />
                             </Grid>
                             <Grid item xs={12}>
                             <TextField
                                 variant="outlined"
                                 required
+                                autoComplete="off"
                                 fullWidth
                                 name="password"
                                 label="Password"
@@ -194,7 +233,6 @@ const RegisterAccount = props => {
                                 id="password"
                                 value={accountInfo.passWordRegister}
                                 onChange={event => handleChange(event, 'passWordRegister')}                
-                                autoComplete="current-password"
                             />
                             </Grid>
                             <Grid item xs={12}>

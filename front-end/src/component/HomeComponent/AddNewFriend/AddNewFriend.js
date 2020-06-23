@@ -47,7 +47,7 @@ const AddNewFriend = props => {
             .then(res => {
                 console.log(res.data);
                 debugger;
-                history.push('/detail/'+ res.data.id);
+                history.push('/home/detail/'+ res.data.id);
             })
             .catch(e => {
                 alert("Wrong password");

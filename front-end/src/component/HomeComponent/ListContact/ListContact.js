@@ -18,9 +18,6 @@ const useStyles = makeStyles((theme)=>({
     root: {
         flexGrow : 1,
     },
-    inline: {
-        display: 'inline',
-    },
 }));
 
 const ListContact = props => {
@@ -34,6 +31,8 @@ const ListContact = props => {
         <React.Fragment>
             <CssBaseline />
             <List>
+            {ContactList != '' ?
+            <pre>
                 {
                     ContactList.map((contact, index) => <ul key={index}>
                         <ListItem button>
@@ -46,7 +45,12 @@ const ListContact = props => {
                         </ListItem>
                     </ul>)
                 }
-            </List>
+            
+            </pre>
+            :
+            null
+          }
+          </List>
         </React.Fragment>); 
 }
 
