@@ -144,8 +144,6 @@ const Home = props => {
             baseUrl+'friend_mini/',config  
           );
           setContactList(result.data);
-          console.log(contactList);
-          debugger;
         };
         fetchData();
       }, []);
@@ -163,12 +161,22 @@ const Home = props => {
         history.push('/listContact');
     }
     const handleSearch = (event) => {
-        debugger;
-        let result= DetailInfoService.getByName(searchTerm);
-        result=
-        setContactList(
-            result
-        );
+        const token= JSON.parse(localStorage.getItem("token"));
+        let config = {
+            headers: {
+              'Authorization': 'Token ' + token
+            }
+        }
+        const fetchData = async () => {
+          const result = await axios(
+            baseUrl+'search?nameFriend='+ searchTerm, config  
+          );
+          debugger;
+          setContactList(result.data);
+          console.log(contactList);
+          
+        };
+        fetchData();
     }
     const handleChange = event => {
         setSearchTerm(

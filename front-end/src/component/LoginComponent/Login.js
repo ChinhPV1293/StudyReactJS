@@ -24,7 +24,6 @@ const Login = props => {
             .then(res => {
                 console.log(res.data.token);
                 localStorage.setItem('token', JSON.stringify(res.data.token));
-                debugger;
                 history.push('/home');
             })
             .catch(e => {

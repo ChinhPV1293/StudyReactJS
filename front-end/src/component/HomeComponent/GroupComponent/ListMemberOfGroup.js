@@ -97,7 +97,7 @@ const ListMemberOfGroup = props => {
                                     </Select>
                                 </FormControl>
                                 <Button variant="contained" color="primary">
-                                    Primary
+                                    Add
                                 </Button>
 
                             </div>

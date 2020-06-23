@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme)=>({
 const ListContact = props => {
     const classes= useStyles();
     const ContactList= props.value;
-    debugger;
     const history= useHistory();
     const handleClick= (event,value) => {
         history.push("/home/detail/"+ value);

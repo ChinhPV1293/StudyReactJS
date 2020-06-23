@@ -10,7 +10,8 @@ router.register(r"groups", views.GroupViewSet)
 router.register(r"friend", views.FriendInfomationViewSet)
 router.register(r"group_friends", views.GroupFriendViewSet)
 router.register(r"friend_mini", views.FriendMiniVewSet)
-
+# router.register(r"search", views.SearchView)
 urlpatterns = [
     path('', include(router.urls)),
+    path('search/',views.SearchView.as_view()),
 ]
